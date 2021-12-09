@@ -213,7 +213,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 10
+  m_fontStyle: 2
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1064,7 +1064,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u2191 Raise Chaos\n\u2193 Lower Chaos\n\u2192 Increase Likelihood\n\u2190
-    Decrease Likelihood\nQ Ask fate\nE Generate an Event\nSpace Begin scene\n"
+    Decrease Likelihood\nQ Ask fate\nE Generate an Event\nSpace Begin scene\nN Generate
+    an NPC\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae549b2d3db58944686dd1cfa8394580, type: 2}
   m_sharedMaterial: {fileID: -5457589492098620739, guid: ae549b2d3db58944686dd1cfa8394580, type: 2}

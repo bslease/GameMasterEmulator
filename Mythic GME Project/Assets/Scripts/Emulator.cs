@@ -108,5 +108,12 @@ public class Emulator : MonoBehaviour
             RollText.text = "";
             DisplayFateText(MythicEvent.GetRandomEvent());
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            // generate UNE npc
+            RollText.text = "";
+            DisplayFateText(UNE.GetNPC(CurrentChaos));
+        }
     }
 }
