@@ -42,8 +42,21 @@ public class Emulator : MonoBehaviour
         FateText.alpha = 1.0f;
     }
 
+    //int numRolls = 0;
+    //int numChaosEvents = 0;
+    //float chanceChaosEvent = 0.0f;
+    //int bentoChaosLevel = 2;
+
     void Update()
     {
+        //bool chaosEventTriggered = BentoDestiny.GetChance(bentoChaosLevel);
+        //if (chaosEventTriggered)
+        //    numChaosEvents++;
+        //numRolls++;
+        //chanceChaosEvent = (float)numChaosEvents / (float)numRolls;
+        //RollText.text = "numEvents: " + numChaosEvents + "; numRolls: " + numRolls;
+        //FateText.text = chanceChaosEvent.ToString();
+
         if (FateText.alpha > FadeAlphaMin)
         {
             FateText.alpha -= FadeRate * Time.deltaTime;

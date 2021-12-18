@@ -5,7 +5,7 @@ public static class UNE
     static string[] NPC_MODIFIER = { "superfluous", "addicted", "conformist" };
     static string[] NPC_BEARING_A = { "scheming", "insane", "friendly", "hostile", "inquisitive", "knowing", "mysterious", "prejudiced" };
     static string[] NPC_NOUN = { "gypsy", "witch", "merchant" };
-    static string[] NPC_POWERLEVEL = { "much less", "less", "neither more nor less", "more", "much more" };
+    static string[] NPC_POWERLEVEL = { "much less powerful than", "less powerful than", "as powerful as", "more powerful than", "much more powerful than" };
     static string[] NPC_MOOD = {"unusually withdrawn", "unusually guarded", "unusually cautious", "true to form",
         "unusually sociable", "unusually helpful", "unusually forthcoming" };
     static string[,] NPC_BEARING_B =
@@ -42,18 +42,18 @@ public static class UNE
         string identity = "A " + bearingA + " and " + modifier + " " + noun + "\n";
 
         string mood = NPC_MOOD[Random.Range(0, NPC_MOOD.Length)];
-        string behavior = "is behaving " + mood + " today.\n";
+        string behavior = "is behaving " + mood + ".\n";
 
         string bearingB = NPC_BEARING_B[bearingAIndex, Random.Range(0, 2)]; // don't like this. use string[][] instead?
         string focus = NPC_FOCUS[Random.Range(0, NPC_FOCUS.Length)];
-        string interest = "When approached they speak of\n" + bearingB + " regarding your " + focus + ".\n";
+        string interest = "They speak of " + bearingB + " regarding your " + focus + ".\n";
 
         string motiveVerb = NPC_MOTIVE_VERB[Random.Range(0, NPC_MOTIVE_VERB.Length)];
         string motiveNoun = NPC_MOTIVE_NOUN[Random.Range(0, NPC_MOTIVE_NOUN.Length)];
         string motive = "They aim to " + motiveVerb + " " + motiveNoun + ".\n";
 
         string powerLevel = NPC_POWERLEVEL[Random.Range(0, NPC_POWERLEVEL.Length)];
-        string strength = "They seem " + powerLevel + " powerful than you.";
+        string strength = "They seem " + powerLevel + " you.";
 
         return identity + behavior + interest + motive + strength;
     }
