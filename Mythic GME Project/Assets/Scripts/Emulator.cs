@@ -62,6 +62,12 @@ public class Emulator : MonoBehaviour
             FateText.alpha -= FadeRate * Time.deltaTime;
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Table test = new Table();
+            test.LoadTable();
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             CurrentChaos = Mathf.Min(++CurrentChaos, MaxChaos);
