@@ -1,7 +1,6 @@
 //using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine;
-//using System.IO;
 
 public class Resource
 {
@@ -27,7 +26,7 @@ public class Resource
     public void LoadResource()
     {
         RawFile = Utilities.ReadFile(Application.dataPath + "/CSV/" + Location);
-        Debug.Log(RawFile);
+        //Debug.Log(RawFile);
     }
 
     public virtual void ParseRawFile()

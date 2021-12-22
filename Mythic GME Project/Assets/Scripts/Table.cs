@@ -37,18 +37,35 @@ public class Table : Resource
     {
         string[] lines = RawFile.Split("\n"[0]);
 
-        string[] titleParts = lines[0].Split(","[0]);
-        string title = titleParts[0];
+        for (int i=0; i<lines.Length; i++)
+        {
+            if (lines[i] == string.Empty)
+                continue;
 
-        Debug.Log(title);
+            string[] values = lines[i].Split(","[0]);
+            int low;
+            int high;
+            int.TryParse(values[0], out low);
+            int.TryParse(values[1], out high);
+            string result = values[2];
 
-        string[] rowParts = lines[1].Split(","[0]);
-        int low;
-        int high;
-        int.TryParse(rowParts[0], out low);
-        int.TryParse(rowParts[1], out high);
-        string result = rowParts[2];
+            Row row = new Row();
+            row.low = low;
+            row.high = high;
+            row.result = result;
+            Rows.Add(row);
+        }
 
-        Debug.Log(low + "-" + high + ":" + result);
+        //Debug.Log(this.ToString());
+    }
+
+    public override string ToString()
+    {
+        string result = base.ToString();
+        for (int i=0; i<Rows.Count; i++)
+        {
+            result += "\n" + Rows[i].low + "-" + Rows[i].high + ": " + Rows[i].result;
+        }
+        return result;
     }
 }
