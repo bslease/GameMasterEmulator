@@ -46,6 +46,31 @@ public class Emulator : MonoBehaviour
     //int numChaosEvents = 0;
     //float chanceChaosEvent = 0.0f;
     //int bentoChaosLevel = 2;
+    void CreateResources(string manifest)
+    {
+        // todo: loop through all files in manifest
+        string[] lines = manifest.Split("\n"[0]);
+        string[] values = lines[1].Split(","[0]);
+        string type = values[1];
+
+        Resource resource = new Resource();
+        if (type == "table")
+        {
+            resource = new Table();
+        }
+
+        resource.Name = values[0];
+        resource.Type = values[1];
+        resource.Location = values[2];
+        int version;
+        int.TryParse(values[3], out version);
+        resource.Version = version;
+        resource.Source = values[4];
+
+        //Debug.Log(resource.ToString());
+        resource.LoadResource();
+        resource.ParseRawFile();
+    }
 
     void Update()
     {
@@ -64,8 +89,9 @@ public class Emulator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Table test = new Table();
-            test.LoadTable();
+            string manifestLocation = Application.dataPath + "/CSV/" + "manifest.csv";
+            string manifest = Utilities.ReadFile(manifestLocation);
+            CreateResources(manifest);
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
