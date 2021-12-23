@@ -29,7 +29,7 @@ public class Emulator : MonoBehaviour
         RefreshContextUI();
         FateText.text = "Welcome";
         FateText.alpha = 1.0f;
-        RollText.text = "";
+        RollText.text = Application.dataPath;
     }
 
     void RefreshContextUI()
@@ -89,10 +89,11 @@ public class Emulator : MonoBehaviour
 
     public void OnClickTableButton(int tableIndex)
     {
-        Debug.Log("recieved table button click event with index: " + tableIndex);
+        //Debug.Log("recieved table button click event with index: " + tableIndex);
         Table t = (Table)TablesList[tableIndex];
         string result = t.RollOnTable();
-        Debug.Log(result);
+        DisplayFateText(result);
+        //Debug.Log(result);
     }
 
     void Update()
@@ -117,30 +118,22 @@ public class Emulator : MonoBehaviour
             CreateResources(manifest);
 
             // TODO - create a button for each table
-            GameObject buttonObj = Instantiate(TableButtonPrefab, TableButtonsContainer.transform);
-            Transform textObj = buttonObj.transform.Find("Text (TMP)");
-            TextMeshProUGUI tmproComp = textObj.GetComponent<TextMeshProUGUI>();
-            tmproComp.text = TablesList[0].Name;
+            for (int i=0; i<TablesList.Count; i++)
+            {
+                GameObject buttonObj = Instantiate(TableButtonPrefab, TableButtonsContainer.transform);
 
-            // TODO - set the onclick event
-            Button buttonComp = buttonObj.GetComponent<Button>();
-            int tableIndex = 0;
-            buttonComp.onClick.RemoveAllListeners();
-            buttonComp.onClick.AddListener(() => { OnClickTableButton(tableIndex); });
+                // set the button text
+                //Transform textObj = buttonObj.transform.Find("Text (TMP)");
+                //TextMeshProUGUI tmproComp = textObj.GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI tmproComp = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+                tmproComp.text = TablesList[i].Name;
 
-
-            //button.SetActive(true);
-
-            //// set the room name and player count texts
-            //button.transform.Find("RoomNameText").GetComponent<TextMeshProUGUI>().text = roomList[x].Name;
-            //button.transform.Find("PlayerCountText").GetComponent<TextMeshProUGUI>().text = roomList[x].PlayerCount + " / " + roomList[x].MaxPlayers;
-
-            //// set the button OnClick event
-            //Button buttonComp = button.GetComponent<Button>();
-            //string roomName = roomList[x].Name;
-            //buttonComp.onClick.RemoveAllListeners();
-            //buttonComp.onClick.AddListener(() => { OnJoinRoomButton(roomName); });            //}
-
+                // set the onclick event
+                Button buttonComp = buttonObj.GetComponent<Button>();
+                int tableIndex = i;
+                buttonComp.onClick.RemoveAllListeners();
+                buttonComp.onClick.AddListener(() => { OnClickTableButton(tableIndex); });
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
