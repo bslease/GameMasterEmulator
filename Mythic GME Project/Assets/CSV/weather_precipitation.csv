@@ -1,0 +1,9 @@
+1,22,The sky is clear. There is no threat of precipitation. 
+23,44,Clouds feather the sky. There is no threat of precipitation.
+45,66,Clouds tower in the otherwise clear sky. There is no threat of precipitation.
+67,71,The sky is dark. Precipitation is likely.
+72,76,The sky is overcast and gray. There is light and intermittent precipitation.
+77,81,The sky is overcast and gray. There is light but steady precipitation.
+82,86,The sky is dark. There is strong and steady precipitation.
+87,91,The sky is dark and angry. There is strong and steady precipitation.
+92,100,The sky is dark and angry. The precipitation is torrential.

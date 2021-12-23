@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class Emulator : MonoBehaviour
 {
+    public GameObject TableButtonPrefab;
+    public RectTransform TableButtonsContainer;
+
     public TMP_Text ChaosText;
     public TMP_Text LikelihoodText;
     public TMP_Text ChancesText;
@@ -84,6 +87,14 @@ public class Emulator : MonoBehaviour
         Debug.Log("Created " + TablesList.Count + " tables from manifest.");
     }
 
+    public void OnClickTableButton(int tableIndex)
+    {
+        Debug.Log("recieved table button click event with index: " + tableIndex);
+        Table t = (Table)TablesList[tableIndex];
+        string result = t.RollOnTable();
+        Debug.Log(result);
+    }
+
     void Update()
     {
         //bool chaosEventTriggered = BentoDestiny.GetChance(bentoChaosLevel);
@@ -101,9 +112,35 @@ public class Emulator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            string manifestLocation = Application.dataPath + "/CSV/" + "manifest.csv";
+            string manifestLocation = Application.dataPath + "/CSV/" + "_manifest.csv";
             string manifest = Utilities.ReadFile(manifestLocation);
             CreateResources(manifest);
+
+            // TODO - create a button for each table
+            GameObject buttonObj = Instantiate(TableButtonPrefab, TableButtonsContainer.transform);
+            Transform textObj = buttonObj.transform.Find("Text (TMP)");
+            TextMeshProUGUI tmproComp = textObj.GetComponent<TextMeshProUGUI>();
+            tmproComp.text = TablesList[0].Name;
+
+            // TODO - set the onclick event
+            Button buttonComp = buttonObj.GetComponent<Button>();
+            int tableIndex = 0;
+            buttonComp.onClick.RemoveAllListeners();
+            buttonComp.onClick.AddListener(() => { OnClickTableButton(tableIndex); });
+
+
+            //button.SetActive(true);
+
+            //// set the room name and player count texts
+            //button.transform.Find("RoomNameText").GetComponent<TextMeshProUGUI>().text = roomList[x].Name;
+            //button.transform.Find("PlayerCountText").GetComponent<TextMeshProUGUI>().text = roomList[x].PlayerCount + " / " + roomList[x].MaxPlayers;
+
+            //// set the button OnClick event
+            //Button buttonComp = button.GetComponent<Button>();
+            //string roomName = roomList[x].Name;
+            //buttonComp.onClick.RemoveAllListeners();
+            //buttonComp.onClick.AddListener(() => { OnJoinRoomButton(roomName); });            //}
+
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))

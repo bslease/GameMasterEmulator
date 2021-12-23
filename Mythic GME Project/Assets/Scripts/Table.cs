@@ -32,6 +32,22 @@ public class Table : Resource
 
     public string Title;
     public List<Row> Rows = new List<Row>();
+    int MaxRoll;
+
+    public string RollOnTable()
+    {
+        string result = "error: result unknown";
+        int dieRoll = Utilities.Roll(MaxRoll);
+        foreach (Row r in Rows)
+        {
+            if (dieRoll >= r.low && dieRoll <= r.high)
+            {
+                result = r.result;
+                break;
+            }
+        }
+        return result;
+    }
 
     public override void ParseRawFile()
     {
@@ -54,6 +70,11 @@ public class Table : Resource
             row.high = high;
             row.result = result;
             Rows.Add(row);
+
+            if (high > MaxRoll)
+            {
+                MaxRoll = high;
+            }
         }
 
         //Debug.Log(this.ToString());

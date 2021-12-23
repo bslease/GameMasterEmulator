@@ -1,3 +1,6 @@
 resourcename,resourcetype,filename,version,source
 Calendar of Harptos,table,dnd_CalendarOfHarptos.csv,0,https://forgottenrealms.fandom.com/wiki/Calendar_of_Harptos
 Time of Day,table,dnd_TimeOfDay.csv,0,https://forgottenrealms.fandom.com/wiki/Hours_of_the_day
+Weather(Temp),table,weather_temp.csv,0,custom
+Weather(Wind),table,weather_wind.csv,0,custom
+Weather(Precipitation),table,weather_precipitation.csv,0,custom
