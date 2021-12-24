@@ -8,6 +8,7 @@ public class Emulator : MonoBehaviour
 {
     public GameObject TableButtonPrefab;
     public RectTransform TableButtonsContainer;
+    public RawImage ImageDisplay;
 
     public TMP_Text ChaosText;
     public TMP_Text LikelihoodText;
@@ -165,6 +166,16 @@ public class Emulator : MonoBehaviour
         if (FateText.alpha > FadeAlphaMin)
         {
             FateText.alpha -= FadeRate * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            string filePath = "C:/Users/bslea/Downloads/DnD/dnd_Forgotten_Realms_Calendar_of_Harptos_Fixed.png"; // Application.dataPath + "images" + "";
+            Texture2D tex = Utilities.LoadPNG(filePath);
+            //GameObject image = GameObject.Find("RawImage");
+            //image.GetComponent<RawImage>().texture = tex;
+            ImageDisplay.texture = tex;
+            ImageDisplay.gameObject.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.L))

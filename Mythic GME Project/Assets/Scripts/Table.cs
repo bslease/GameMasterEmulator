@@ -42,6 +42,8 @@ public class Table : Resource
                 continue;
 
             string[] values = lines[i].Split(","[0]);
+            if (values.Length < 3)
+                continue;
 
             if (Utilities.ResourceTypes.Contains(values[0]))
             {

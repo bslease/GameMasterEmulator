@@ -1,13 +1,43 @@
-Table,Weather Regime,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
-1,15,Weater remains settled or unsettled.
-16,20,Weather becomes settled or unsettled.
-Table, Weather Summer Settled,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
-1,5,Cool and windy. Visibility good. No rain or light rain showers, cloudy, calm or light winds, cool.
-6,10,Clear and warm. Visibility good. No rain, clear, calm or light wind, warm.
-11,15,Clear and hot. Visibility good. No rain, clear, calm or light wind, hot.
-16,20,Cloudy and warm. Poor Visibility. Nor rain or light rain showers, cloudy, light wind, warm.
-Table,Weather Summer Unsettled,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
-1,7,Clear and dry. Visibility good. No rain, clear, calm or light wind, warm.
-8,12,Rain showers. Visibility poor. Rain showers, cloudy, light wind, warm.
-13,18,Rain. Visibility poor. Rain, cloudy, light to moderate winds, cool.
-19,20,Storm. Visibility poor. Hevy rain, cloudy, moderate to strong winds, cool.
+Table,Settled Weather Regime,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,15,Weater remains settled.
+16,20,Weather becomes unsettled.
+
+Table,Settled Summer Weather,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,5,Cool and windy. Visibility good. Cloudy.
+6,10,Clear and warm. Visibility good. Light wind.
+11,15,Clear and hot. Visibility good.
+16,20,Cloudy and warm. Visibility good. Light rain.
+
+Table,Settled Spring/Fall Weather,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,5,Cool and foggy. Morning visibility poor. 
+6,10,Clear and cool. Visibility good. Light wind.
+11,15,Clear and warm. Visibility good. Calm. 
+16,20,Cloudy and warm. Visibility good. Light rain.
+
+Table,Settled Winter Weather,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,5,Cold and foggy. Morning visibility poor. 
+6,10,Clear and cold. Visibility good. Light wind.
+11,15,Clear and cool. Visibility good. Calm.
+16,20,Cloudy and cool. Visibility good. Light snow.
+
+Table,Unsettled Weather Regime,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,15,Weater remains unsettled.
+16,20,Weather becomes settled.
+
+Table,Unsettled Summer Weather,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,7,Clear and hot. Visibility good. Humid.
+8,12,Rain showers. Visibility poor. Cloudy. Light wind. Warm.
+13,18,Steady rain. Visibility poor. Cloudy. Light to moderate winds. Cool.
+19,20,Storm. Visibility poor. Moderate to strong winds. Cool.
+
+Table,Unsettled Spring/Fall Weather,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,6,Clear and dry. Visibility good. Cool.
+7,11,Rain showers. Visibility poor. Cloudy. Light wind. Cool.
+12,17,Steady rain. Visibility poor. Cloudy. Light to moderate winds. Cool.
+18,20,Storm. Visibility poor. Moderate to strong winds. Cool.
+
+Table,Unsettled Winter Weather,https://copperpieces.blogspot.com/2021/09/is-random-weather-in-role-playing-games.html
+1,4,Clear and dry. Visibility good. Calm. Cool.
+5,9,Snow showers. Visibility poor. Cloudy. Light wind. Cool. 
+10,16,Steady snow. Visibility poor. Cloudy. Light to moderate winds. Cold.
+17,20,Snow storm. Visibility poor. Cloudy. Moderate to strong winds. Cold.

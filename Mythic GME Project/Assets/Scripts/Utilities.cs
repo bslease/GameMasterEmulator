@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+//using UnityEngine.UI;
 
 public static class Utilities
 {
@@ -14,6 +15,35 @@ public static class Utilities
     public static int Roll(int die)
     {
         return Random.Range(1, die+1);
+    }
+
+    public static Texture2D LoadPNG(string filePath)
+    {
+        //// read image and store in a byte array
+        //byte[] byteArray = File.ReadAllBytes(@"D:\SampleImage.png");
+        ////create a texture and load byte array to it
+        //// Texture size does not matter 
+        //Texture2D sampleTexture = new Texture2D(2, 2);
+        //// the size of the texture will be replaced by image size
+        //bool isLoaded = sampleTexture.LoadImage(byteArray);
+        //// apply this texure as per requirement on image or material
+        //GameObject image = GameObject.Find("RawImage");
+        //if (isLoaded)
+        //{
+        //    image.GetComponent<RawImage>().texture = sampleTexture;
+        //}
+
+
+        Texture2D tex = null;
+        byte[] fileData;
+
+        if (File.Exists(filePath))
+        {
+            fileData = File.ReadAllBytes(filePath);
+            tex = new Texture2D(2, 2);
+            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+        }
+        return tex;
     }
 
     public static List<string> FindAllResourcesInDirectory()
