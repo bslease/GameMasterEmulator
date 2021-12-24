@@ -34,7 +34,7 @@ public class Resource
         Debug.Log("Attempt to parse unknown resource type");
     }
 
-    public virtual void ParseRawFileData(string rawFileData)
+    public virtual void ParseRawFileData(string rawFileData, int startingLineIndex)
     {
         Debug.Log("Attempt to parse unknown resource type");
     }

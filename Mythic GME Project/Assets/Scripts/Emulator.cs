@@ -92,20 +92,33 @@ public class Emulator : MonoBehaviour
     {
         foreach(string filePath in resourceFileList)
         {
+            Debug.Log("Parsing " + filePath);
             FileInfo fileInfo = new FileInfo(filePath);
             string rawFileData = Utilities.ReadFile(filePath);
-            //string[] lines = rawFileData.Split("\n"[0]);
-            Resource resource = new Resource();
-            resource.Type = "table";
-            if (resource.Type == "table")
+            string[] lines = rawFileData.Split("\n"[0]);
+
+            Resource resource;
+            int lineIndex = 0;
+            foreach (string line in lines)
             {
-                resource = new Table();
+                string[] values = line.Split(',');
+                if (Utilities.ResourceTypes.Contains(values[0].ToLower()))
+                {
+                    resource = new Resource();
+                    resource.Type = values[0].ToLower();
+                    // we're making a new resource
+                    if (resource.Type == "table")
+                    {
+                        resource = new Table();
+                    }
+                    resource.Name = values[1];
+                    resource.Location = filePath;
+                    resource.ParseRawFileData(rawFileData, lineIndex);
+                    TablesList.Add(resource);
+                }
+                lineIndex++;
             }
-            resource.Name = fileInfo.Name.Split('.')[0];
-            resource.Location = filePath;
-            //resource.LoadResource();
-            resource.ParseRawFileData(rawFileData);
-            TablesList.Add(resource);
+
         }
         //Debug.Log("Created " + TablesList.Count + " tables from directory.");
     }
@@ -154,20 +167,20 @@ public class Emulator : MonoBehaviour
             FateText.alpha -= FadeRate * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             List<string> filePathsList = Utilities.FindAllResourcesInDirectory();
             CreateResources(filePathsList);
             CreateTableButtons();
         }
         
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            string manifestLocation = Application.dataPath + "/CSV/" + "_manifest.csv";
-            string manifest = Utilities.ReadFile(manifestLocation);
-            CreateResources(manifest);
-            CreateTableButtons();
-        }
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    string manifestLocation = Application.dataPath + "/CSV/" + "_manifest.csv";
+        //    string manifest = Utilities.ReadFile(manifestLocation);
+        //    CreateResources(manifest);
+        //    CreateTableButtons();
+        //}
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {

@@ -5,8 +5,11 @@ using System.IO;
 
 public static class Utilities
 {
+    public static List<string> ResourceTypes = new List<string>() { "table" };
     public static List<string> ResourceFileTypes = new List<string>() { ".csv" };
-    public static List<string> ExclusionList = new List<string>() { "testfile.csv", "_manifest.csv", "weather_shaffrey.csv" };
+    public static List<string> FileExclusionList = new List<string>() {
+        "_manifest.csv", "testfile.csv", "weather_precipitation.csv", "weather_temp.csv", "weather_wind.csv"
+    };
 
     public static int Roll(int die)
     {
@@ -20,9 +23,10 @@ public static class Utilities
         foreach (string filePath in filePaths)
         {
             var fileInfo = new FileInfo(filePath); 
-            if (ResourceFileTypes.Contains(fileInfo.Extension.ToLower()) && !ExclusionList.Contains(fileInfo.Name.ToLower()))
+            if (ResourceFileTypes.Contains(fileInfo.Extension.ToLower()) && !FileExclusionList.Contains(fileInfo.Name.ToLower()))
             {
                 resourceList.Add(filePath);
+                //Debug.Log(filePath);
             }
         }
         return resourceList;

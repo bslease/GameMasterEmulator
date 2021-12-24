@@ -5,24 +5,6 @@ using System.IO;
 
 public class Table : Resource
 {
-    // source
-    // type
-    // title
-    // category / tags
-    // result row:
-    // low value inclusive, high value inclusive, result
-    // format string
-    // array/list of results
-
-    // types
-    // supporting: no user-side roll
-    // primary: a table a user can roll on that doesn't reference any other tables
-    // meta: a table of tables - the other tables can be of any type
-
-    // images? (cards)
-
-    //public string file;
-
     public struct Row
     {
         public int low;
@@ -33,6 +15,7 @@ public class Table : Resource
     public string Title;
     public List<Row> Rows = new List<Row>();
     int MaxRoll;
+    int StartingLineIndex;
 
     public string RollOnTable()
     {
@@ -53,12 +36,18 @@ public class Table : Resource
     {
         string[] lines = RawFile.Split("\n"[0]);
 
-        for (int i=0; i<lines.Length; i++)
+        for (int i=StartingLineIndex; i<lines.Length; i++)
         {
             if (lines[i] == string.Empty)
                 continue;
 
             string[] values = lines[i].Split(","[0]);
+
+            if (Utilities.ResourceTypes.Contains(values[0]))
+            {
+                break;
+            }
+
             int low;
             int high;
             int.TryParse(values[0], out low);
@@ -80,9 +69,10 @@ public class Table : Resource
         //Debug.Log(this.ToString());
     }
 
-    public override void ParseRawFileData(string rawFileData)
+    public override void ParseRawFileData(string rawFileData, int startingLineIndex)
     {
         RawFile = rawFileData;
+        StartingLineIndex = startingLineIndex;
         ParseRawFile();
     }
 
