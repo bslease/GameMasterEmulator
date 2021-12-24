@@ -80,6 +80,12 @@ public class Table : Resource
         //Debug.Log(this.ToString());
     }
 
+    public override void ParseRawFileData(string rawFileData)
+    {
+        RawFile = rawFileData;
+        ParseRawFile();
+    }
+
     public override string ToString()
     {
         string result = base.ToString();

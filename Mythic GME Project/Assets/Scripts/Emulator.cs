@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.IO;
 
 public class Emulator : MonoBehaviour
 {
@@ -84,7 +85,49 @@ public class Emulator : MonoBehaviour
             TablesList.Add(resource);
         }
 
-        Debug.Log("Created " + TablesList.Count + " tables from manifest.");
+        //Debug.Log("Created " + TablesList.Count + " tables from manifest.");
+    }
+
+    void CreateResources(List<string> resourceFileList)
+    {
+        foreach(string filePath in resourceFileList)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            string rawFileData = Utilities.ReadFile(filePath);
+            //string[] lines = rawFileData.Split("\n"[0]);
+            Resource resource = new Resource();
+            resource.Type = "table";
+            if (resource.Type == "table")
+            {
+                resource = new Table();
+            }
+            resource.Name = fileInfo.Name.Split('.')[0];
+            resource.Location = filePath;
+            //resource.LoadResource();
+            resource.ParseRawFileData(rawFileData);
+            TablesList.Add(resource);
+        }
+        //Debug.Log("Created " + TablesList.Count + " tables from directory.");
+    }
+
+    void CreateTableButtons()
+    {
+        for (int i = 0; i < TablesList.Count; i++)
+        {
+            GameObject buttonObj = Instantiate(TableButtonPrefab, TableButtonsContainer.transform);
+
+            // set the button text
+            //Transform textObj = buttonObj.transform.Find("Text (TMP)");
+            //TextMeshProUGUI tmproComp = textObj.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI tmproComp = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+            tmproComp.text = TablesList[i].Name;
+
+            // set the onclick event
+            Button buttonComp = buttonObj.GetComponent<Button>();
+            int tableIndex = i;
+            buttonComp.onClick.RemoveAllListeners();
+            buttonComp.onClick.AddListener(() => { OnClickTableButton(tableIndex); });
+        }
     }
 
     public void OnClickTableButton(int tableIndex)
@@ -111,29 +154,19 @@ public class Emulator : MonoBehaviour
             FateText.alpha -= FadeRate * Time.deltaTime;
         }
 
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            List<string> filePathsList = Utilities.FindAllResourcesInDirectory();
+            CreateResources(filePathsList);
+            CreateTableButtons();
+        }
+        
         if (Input.GetKeyDown(KeyCode.L))
         {
             string manifestLocation = Application.dataPath + "/CSV/" + "_manifest.csv";
             string manifest = Utilities.ReadFile(manifestLocation);
             CreateResources(manifest);
-
-            // TODO - create a button for each table
-            for (int i=0; i<TablesList.Count; i++)
-            {
-                GameObject buttonObj = Instantiate(TableButtonPrefab, TableButtonsContainer.transform);
-
-                // set the button text
-                //Transform textObj = buttonObj.transform.Find("Text (TMP)");
-                //TextMeshProUGUI tmproComp = textObj.GetComponent<TextMeshProUGUI>();
-                TextMeshProUGUI tmproComp = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-                tmproComp.text = TablesList[i].Name;
-
-                // set the onclick event
-                Button buttonComp = buttonObj.GetComponent<Button>();
-                int tableIndex = i;
-                buttonComp.onClick.RemoveAllListeners();
-                buttonComp.onClick.AddListener(() => { OnClickTableButton(tableIndex); });
-            }
+            CreateTableButtons();
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))

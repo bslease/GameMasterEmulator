@@ -1,11 +1,31 @@
+//using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
 public static class Utilities
 {
+    public static List<string> ResourceFileTypes = new List<string>() { ".csv" };
+    public static List<string> ExclusionList = new List<string>() { "testfile.csv", "_manifest.csv", "weather_shaffrey.csv" };
+
     public static int Roll(int die)
     {
         return Random.Range(1, die+1);
+    }
+
+    public static List<string> FindAllResourcesInDirectory()
+    {
+        List<string> resourceList = new List<string>();
+        IEnumerable<string> filePaths = Directory.EnumerateFiles(Application.dataPath + "/CSV/");
+        foreach (string filePath in filePaths)
+        {
+            var fileInfo = new FileInfo(filePath); 
+            if (ResourceFileTypes.Contains(fileInfo.Extension.ToLower()) && !ExclusionList.Contains(fileInfo.Name.ToLower()))
+            {
+                resourceList.Add(filePath);
+            }
+        }
+        return resourceList;
     }
 
     public static string ReadFile(string location)
