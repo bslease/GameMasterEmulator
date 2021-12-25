@@ -14,6 +14,7 @@ public class Table : Resource
 
     public string Title;
     public List<Row> Rows = new List<Row>();
+    public Texture2D Image;
     int MaxRoll;
     int StartingLineIndex;
 

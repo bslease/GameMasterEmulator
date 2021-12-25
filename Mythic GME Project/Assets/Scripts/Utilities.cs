@@ -6,10 +6,13 @@ using System.IO;
 
 public static class Utilities
 {
+    public const string TABLESPATH = "C:/Users/bslea/Downloads/DnD/data/tables/";
+    public const string IMAGESPATH = "C:/Users/bslea/Downloads/DnD/data/images/";
+
     public static List<string> ResourceTypes = new List<string>() { "table" };
     public static List<string> ResourceFileTypes = new List<string>() { ".csv" };
     public static List<string> FileExclusionList = new List<string>() {
-        "_manifest.csv", "testfile.csv", "weather_precipitation.csv", "weather_temp.csv", "weather_wind.csv"
+        // "_manifest.csv", "testfile.csv", "weather_precipitation.csv", "weather_temp.csv", "weather_wind.csv"
     };
 
     public static int Roll(int die)
@@ -49,7 +52,8 @@ public static class Utilities
     public static List<string> FindAllResourcesInDirectory()
     {
         List<string> resourceList = new List<string>();
-        IEnumerable<string> filePaths = Directory.EnumerateFiles(Application.dataPath + "/CSV/");
+        //IEnumerable<string> filePaths = Directory.EnumerateFiles(Application.dataPath + "/CSV/");
+        IEnumerable<string> filePaths = Directory.EnumerateFiles(TABLESPATH);
         foreach (string filePath in filePaths)
         {
             var fileInfo = new FileInfo(filePath); 

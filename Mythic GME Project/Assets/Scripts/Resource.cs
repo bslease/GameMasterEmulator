@@ -25,7 +25,8 @@ public class Resource
 
     public void LoadResource()
     {
-        RawFile = Utilities.ReadFile(Application.dataPath + "/CSV/" + Location);
+        //RawFile = Utilities.ReadFile(Application.dataPath + "/CSV/" + Location);
+        RawFile = Utilities.ReadFile(Utilities.TABLESPATH + Location);
         //Debug.Log(RawFile);
     }
 

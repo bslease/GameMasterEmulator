@@ -54,40 +54,40 @@ public class Emulator : MonoBehaviour
     //int bentoChaosLevel = 2;
     List<Resource> TablesList = new List<Resource>();
 
-    void CreateResources(string manifest)
-    {
-        string[] lines = manifest.Split("\n"[0]);
-        for (int i=1; i<lines.Length; i++)
-        {
-            if (lines[i] == string.Empty)
-                continue;
+    //void CreateResources(string manifest)
+    //{
+    //    string[] lines = manifest.Split("\n"[0]);
+    //    for (int i=1; i<lines.Length; i++)
+    //    {
+    //        if (lines[i] == string.Empty)
+    //            continue;
 
-            string[] values = lines[i].Split(","[0]);
-            string type = values[1];
+    //        string[] values = lines[i].Split(","[0]);
+    //        string type = values[1];
 
-            Resource resource = new Resource();
-            if (type == "table")
-            {
-                resource = new Table();
-            }
+    //        Resource resource = new Resource();
+    //        if (type == "table")
+    //        {
+    //            resource = new Table();
+    //        }
 
-            resource.Name = values[0];
-            resource.Type = values[1];
-            resource.Location = values[2];
-            int version;
-            int.TryParse(values[3], out version);
-            resource.Version = version;
-            resource.Source = values[4];
+    //        resource.Name = values[0];
+    //        resource.Type = values[1];
+    //        resource.Location = values[2];
+    //        int version;
+    //        int.TryParse(values[3], out version);
+    //        resource.Version = version;
+    //        resource.Source = values[4];
 
-            //Debug.Log(resource.ToString());
-            resource.LoadResource();
-            resource.ParseRawFile();
+    //        //Debug.Log(resource.ToString());
+    //        resource.LoadResource();
+    //        resource.ParseRawFile();
 
-            TablesList.Add(resource);
-        }
+    //        TablesList.Add(resource);
+    //    }
 
-        //Debug.Log("Created " + TablesList.Count + " tables from manifest.");
-    }
+    //    //Debug.Log("Created " + TablesList.Count + " tables from manifest.");
+    //}
 
     void CreateResources(List<string> resourceFileList)
     {
@@ -111,6 +111,11 @@ public class Emulator : MonoBehaviour
                     if (resource.Type == "table")
                     {
                         resource = new Table();
+                        if (values[2] != string.Empty)
+                        {
+                            Texture2D tex = Utilities.LoadPNG(Utilities.IMAGESPATH + values[2]);
+                            ((Table)resource).Image = tex;
+                        }
                     }
                     resource.Name = values[1];
                     resource.Location = filePath;
@@ -148,6 +153,15 @@ public class Emulator : MonoBehaviour
     {
         //Debug.Log("recieved table button click event with index: " + tableIndex);
         Table t = (Table)TablesList[tableIndex];
+        if (t.Image)
+        {
+            ImageDisplay.texture = t.Image;
+            ImageDisplay.gameObject.SetActive(true);
+        }
+        else
+        {
+            //ImageDisplay.gameObject.SetActive(false);
+        }
         string result = t.RollOnTable();
         DisplayFateText(result);
         //Debug.Log(result);
@@ -166,16 +180,6 @@ public class Emulator : MonoBehaviour
         if (FateText.alpha > FadeAlphaMin)
         {
             FateText.alpha -= FadeRate * Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            string filePath = "C:/Users/bslea/Downloads/DnD/dnd_Forgotten_Realms_Calendar_of_Harptos_Fixed.png"; // Application.dataPath + "images" + "";
-            Texture2D tex = Utilities.LoadPNG(filePath);
-            //GameObject image = GameObject.Find("RawImage");
-            //image.GetComponent<RawImage>().texture = tex;
-            ImageDisplay.texture = tex;
-            ImageDisplay.gameObject.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.L))
